@@ -7,3 +7,6 @@ def start_game():
 def collect_resources():
     print("Raccolta risorse in Minecraft Java...")
     # Logica per raccogliere risorse come minerali, legno, ecc.
+def join_server(ip):
+    # Automazione per aprire il launcher e connettersi a un server
+    pass
