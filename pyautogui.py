@@ -60,3 +60,19 @@ def build_block(x, y):
     # Muove e clicca nella posizione per costruire
     move_mouse_with_variation(x, y)
     pyautogui.click()
+# Funzione per saltare in Minecraft (o altri giochi)
+def jump():
+    press_key('space')  # Spazio per saltare in Minecraft
+
+# Funzione per attaccare un nemico
+def attack():
+    press_key('left')  # Tasto sinistro per attaccare in alcuni giochi
+def play_game():
+    # Esegui alcune azioni: movimenti casuali, attacco, costruzione
+    move_mouse_with_variation(500, 300)  # Esempio di movimento
+    jump()  # Esegui il salto
+    build_block(600, 400)  # Costruisci un blocco in una posizione
+    attack()  # Attacca un nemico
+
+# Avvia il gioco
+play_game()
