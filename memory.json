@@ -1,0 +1,69 @@
+{
+  "accounts": {
+    "minecraft_java": {
+      "nickname": "FanginoK0",
+      "password": "ciambella90",
+      "last_server": "mc.example.com"
+    },
+    "minecraft_bedrock": {
+      "nickname": "FanginoK0",
+      "password": "ciambella90"
+    },
+    "brawl_stars": {
+      "nickname": "FanginoK0",
+      "password": "ciambella90"
+    },
+    "clash_royale": {
+      "nickname": "FanginoK0",
+      "password": "ciambella90"
+    },
+    "clash_of_clans": {
+      "nickname": "FanginoK0",
+      "password": "ciambella90"
+    },
+    "squad_buster": {
+      "nickname": "FanginoK0",
+      "password": "ciambella90"
+    },
+    "fortnite": {
+      "nickname": "FanginoK0",
+      "password": "ciambella90"
+    },
+    "fall_guys": {
+      "nickname": "FanginoK0",
+      "password": "ciambella90"
+    },
+    "stumble_guys": {
+      "nickname": "FanginoK0",
+      "password": "ciambella90"
+    }
+  }
+}
+def save_account(game, nickname, password, memory):
+    """Salva le credenziali di accesso per un gioco."""
+    if "accounts" not in memory:
+        memory["accounts"] = {}
+    memory["accounts"][game] = {
+        "nickname": nickname,
+        "password": password
+    }
+    save_memory(memory)
+    print(f"Account salvato per {game}: {nickname}")
+def get_account(game, memory):
+    """Recupera le credenziali di accesso per un gioco."""
+    return memory["accounts"].get(game, None)
+save_account("minecraft_java", "FanginoK0", "ciambella90", memory)
+save_account("fortnite", "FanginoK0", "ciambella90", memory)
+account = get_account("minecraft_java", memory)
+if account:
+    print(f"Nickname: {account['nickname']}, Password: {account['password']}")
+else:
+    print("Nessun account trovato per Minecraft Java.")
+def login(game, memory):
+    account = get_account(game, memory)
+    if account:
+        print(f"Effettuo l'accesso con il nickname {account['nickname']}...")
+        # Qui inseriamo l'automazione con pyautogui o altre librerie
+    else:
+        print(f"Nessun account salvato per {game}.")
+login("minecraft_java", memory)
