@@ -1,0 +1,9 @@
+python-dotenv
+google-generativeai
+openai
+anthropic
+ipython
+ipykernel
+pandas
+openpyxl
+xlsxwriter
