@@ -1,77 +1,74 @@
 import pyautogui
 import time
+import subprocess
+import os
 
-# Impostare le credenziali per il login (nome utente, password)
-username = "FanginoK0"
-password = "ciambella90"
-server_ip = "minecraftserver.example.com"
+# Impostazioni del server
+server_ip = "IP_DEL_TUO_SERVER"  # Inserisci l'IP del tuo server
+server_port = "25565"  # Porta del server (di default è 25565)
+username = "FanginoK0"  # Nickname dell'AI
+password = "ciambella90"  # Password dell'AI
 
-def login_minecraft():
-    # Avvia il launcher di Minecraft
-    pyautogui.hotkey('win', 'r')
-    time.sleep(1)
-    pyautogui.write('Minecraft Launcher')
-    pyautogui.press('enter')
-    time.sleep(5)
-    
-    # Inserisci il nome utente
+# Funzione per lanciare il gioco e accedere al server
+def start_minecraft():
+    # Comando per avviare Minecraft con Legacy Launcher
+    os.system('start java -Xmx2G -Xms1G -jar MinecraftLauncher.exe')  # Modifica con il percorso giusto
+    time.sleep(5)  # Aspetta che Minecraft si avvii
+
+    # Inserisci il login e la password automaticamente
     pyautogui.write(username)
-    pyautogui.press('tab')  # Spostati sul campo password
-    time.sleep(1)
-    
-    # Inserisci la password
+    pyautogui.press('tab')  # Passa al campo della password
     pyautogui.write(password)
-    pyautogui.press('enter')
-    time.sleep(10)  # Attendi il login
+    pyautogui.press('enter')  # Premi invio per fare login
+    time.sleep(10)  # Aspetta che Minecraft si carichi
 
-    # Selezioniamo il server
-    pyautogui.write(server_ip)
-    pyautogui.press('enter')
-    time.sleep(10)
+    # Connetti al server
+    pyautogui.write(f'{server_ip}:{server_port}')
+    pyautogui.press('enter')  # Premi invio per connettersi al server
 
-login_minecraft()
-# Movimento in Minecraft
-def muovi_avanti():
-    pyautogui.press('w')  # Muovi in avanti
+# Funzione per muoversi in avanti (con tasto W)
+def move_forward():
+    pyautogui.keyDown('w')
     time.sleep(1)
+    pyautogui.keyUp('w')
 
-def gira_sinistra():
-    pyautogui.press('a')  # Gira a sinistra
-    time.sleep(1)
+# Funzione per saltare (con tasto SPACE)
+def jump():
+    pyautogui.press('space')
 
-def gira_destra():
-    pyautogui.press('d')  # Gira a destra
-    time.sleep(1)
+# Funzione per raccogliere (con tasto 1 - raccogliere item nella barra veloce)
+def collect_item():
+    pyautogui.press('1')
 
-def cammina_indietro():
-    pyautogui.press('s')  # Muovi indietro
-    time.sleep(1)
-# Costruzione (piazzamento di blocchi)
-def costruisci():
-    pyautogui.click(button='right')  # Clicca con il tasto destro del mouse per piazzare un blocco
-    time.sleep(1)
-# Raccolta (mining)
-def raccogli():
-    pyautogui.click(button='left')  # Clicca con il tasto sinistro per raccogliere blocchi
-    time.sleep(1)
-def test_ai():
-    # Login e connessione
-    login_minecraft()
-    
-    # Test di movimento
-    print("AI si sta muovendo...")
-    muovi_avanti()
-    gira_sinistra()
-    gira_destra()
-    cammina_indietro()
-    
-    # Test di costruzione
-    print("AI sta costruendo...")
-    costruisci()
-    
-    # Test di raccolta
-    print("AI sta raccogliendo...")
-    raccogli()
+# Funzione per costruire (posizionare blocco con il tasto destro)
+def build():
+    pyautogui.mouseDown(button='right')
+    time.sleep(0.1)
+    pyautogui.mouseUp(button='right')
 
-# Esegui il test
-test_ai()
+# Funzione per fermarsi (con tasto S)
+def stop():
+    pyautogui.keyDown('s')
+    time.sleep(1)
+    pyautogui.keyUp('s')
+
+# Funzione per eseguire le azioni
+def play_game():
+    move_forward()
+    time.sleep(2)
+    jump()
+    time.sleep(1)
+    collect_item()
+    time.sleep(1)
+    build()
+    time.sleep(1)
+    stop()
+
+# Avvia Minecraft, effettua il login, connetti al server e inizia a giocare
+def main():
+    start_minecraft()
+    play_game()
+
+# Esegui il programma
+if __name__ == "__main__":
+    main()
